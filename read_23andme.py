@@ -13,7 +13,7 @@ import MySQLdb
 # this connects to my database
 mydb = MySQLdb.connect(host='localhost',
     user='root',
-    passwd='password',
+    passwd='elfcheese',
     db='23andMe')
 cursor = mydb.cursor()
 
@@ -44,14 +44,15 @@ for line in lines:
         position = columns[2]
         genotype = columns[3]
 
-        # this shows you what the insert command will look like
-        print("""INSERT INTO HU0DEE68(rsid, chromosome, position, genotype) VALUES(%s, %s, %s, %s);""" % (rsid, chromosome, position, genotype))
+        # PERCENT STRING FORMATTING
+        #print("""INSERT INTO HU0DEE68(rsid, chromosome, position, genotype) VALUES(%s, %s, %s, %s);""" % (rsid, chromosome, position, genotype))
         # here's the command
-        command = """INSERT INTO HU0DEE68 (rsid, chromosome, position, genotype) VALUES(%s, %s, %s, %s);""" % (rsid, chromosome, position, genotype)
+        #command = """INSERT INTO HU0DEE68 (rsid, chromosome, position, genotype) VALUES(%s, %s, %s, %s);""" % (rsid, chromosome, position, genotype)
         # this executes the MySQL command
+        #cursor.execute(command)
+        print("""INSERT INTO HU0DEE68(rsid, chromosome, position, genotype) VALUES({rsid}, {chromosome}, {position}, {genotype});""".format(rsid=rsid, chromosome=chromosome, position=position, genotype=genotype))
+        command = """INSERT INTO HU0DEE68(rsid, chromosome, position, genotype) VALUES('{rsid}', '{chromosome}', '{position}', '{genotype}');""".format(rsid=rsid, chromosome=chromosome, position=position, genotype=genotype)
         cursor.execute(command)
-
-# this closes everything that we opened
 file.close()
 mydb.commit()
 cursor.close()
