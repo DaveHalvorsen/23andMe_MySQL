@@ -7,7 +7,7 @@ import MySQLdb
 mydb = MySQLdb.connect(host='localhost',
     user='root',
     passwd='password',
-    db='23_Data')
+    db='Separate_23andMe_Tables')
 cursor = mydb.cursor()
 
 
@@ -15,7 +15,7 @@ cursor = mydb.cursor()
 
 # this cycles through all the ACTUAL 23andMe files (382)
 import os
-list = os.listdir("/media/david/Terabyte/2018-06-13_DOWNLOAD_PGP")
+list = os.listdir("/media/david/320GB/Data/PGP")
 file_counter = 0
 for file in list:
     # several errors crashed the program, so this let me restart things
@@ -23,7 +23,7 @@ for file in list:
     #if file_counter <= 389:
         #file_counter += 1
         #continue
-    full_path = "/media/david/Terabyte/2018-06-13_DOWNLOAD_PGP/" + file
+    full_path = "/media/david/320GB/Data/PGP/" + file
     file_data = open(full_path, "r")
     lines = file_data.readlines()
     # only use 23andMe data files (there's GoodforGenes, Ancestry & Promoethease files)
